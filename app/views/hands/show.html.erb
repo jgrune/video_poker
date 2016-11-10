@@ -1,0 +1,11 @@
+
+<h1>Hand #<%= @hand.id %></h1>
+
+<div class="hand">
+  <% @hand.cards.each do |card| %>
+  <div>
+    <p><%= card.value %> of <br/><%= card.suit %></p>
+    <%= image_tag ("#{card.suit[0]}0#{card.value}.png") %>
+  </div>
+  <% end %>
+</div>

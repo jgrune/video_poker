@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Poker</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
+  </head>
+
+  <body>
+      <h1>GruneTunes Video Poker</h1>
+      <nav>
+        <h3><%= link_to "All Hands", hands_path %></h3>
+        <h3><%= link_to "Deal New Hand", new_hand_path %></h3>
+      </nav>
+
+    <%= yield %>
+
+  </body>
+</html>
