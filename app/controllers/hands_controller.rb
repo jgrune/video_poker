@@ -6,6 +6,11 @@ class HandsController < ApplicationController
 
   def show
     @hand = Hand.find(params[:id])
+    eval_hand = Poker::Hand.new(eval @hand.cards)
+
+    # puts "*" * 50
+    # puts hand1.rank
+    @test = eval_hand.rank
   end
 
   def create
@@ -18,8 +23,6 @@ class HandsController < ApplicationController
       card.save
     end
     @lasthand = Hand.last
-
-# how do you use a gem like this?
 
     redirect_to @lasthand
   end
@@ -59,19 +62,20 @@ private
   def eval cards
     @eval_hand = cards.map {|card|
       if card.value == 14
-        "A#{card.suit[0].upcase}"
+        "A#{card.suit[0]}"
       elsif card.value == 13
-        "K#{card.suit[0].upcase}"
+        "K#{card.suit[0]}"
       elsif card.value == 12
-        "Q#{card.suit[0].upcase}"
+        "Q#{card.suit[0]}"
       elsif card.value == 11
-        "J#{card.suit[0].upcase}"
+        "J#{card.suit[0]}"
       elsif card.value == 10
-        "T#{card.suit[0].upcase}"
+        "T#{card.suit[0]}"
       else
-        "#{card.value}#{card.suit[0].upcase}"
+        "#{card.value}#{card.suit[0]}"
       end
     }
+    @eval_hand.join(" ")
   end
 
 end
