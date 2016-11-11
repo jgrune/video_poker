@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Poker</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Poker</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
+</head>
 
-  <body>
-      <h1>GruneTunes Video Poker</h1>
-      <nav>
-        <h3><%= link_to "All Hands", hands_path %></h3>
-        <h3><%= link_to "Deal New Hand", hands_path, method: :post %></h3>
-      </nav>
+<body>
+  <h1><%= link_to "GruneTunes Video Poker", :root %></h1>
 
-    <%= yield %>
+  <nav>
+    <p style="float: right">
+      <% if @current_user %>
+        <%= link_to "Welcome, #{@current_user.username}!", user_path(@current_user) %>
+        <%= link_to "Sign Out", session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Sign In", new_session_path %>
+      <% end %>
+    </p>
 
-  </body>
+    <% if @current_user %>
+      <h3><%= link_to "All Hands", hands_path %></h3>
+      <h3><%= link_to "Deal New Hand", hands_path, method: :post %></h3>
+    <% end %>
+  </nav>
+
+  <!-- defines flash messages -->
+  <% flash.each do |type, message| %>
+  <p class="<%= type %>"><%= message %></p>
+  <% end %>
+
+  <%= yield %>
+
+</body>
 </html>

@@ -1,7 +1,6 @@
 
 <h1>EDIT PAGE: Hand #<%= @hand.id %></h1>
 
-
 <%= form_for @hand do |f| %>
 
 <div class="hand">
@@ -9,7 +8,7 @@
   <div>
     <p><%= card.value %> of <br/><%= card.suit %></p>
     <%= image_tag ("#{card.suit[0]}0#{card.value}.png") %>
-    <%= check_box_tag 'card_ids[]', card.id %>
+    <p><%= check_box_tag 'card_ids[]', card.id %></p>
   </div>
   <% end %>
 </div>
