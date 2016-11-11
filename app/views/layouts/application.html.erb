@@ -13,7 +13,7 @@
       <h1>GruneTunes Video Poker</h1>
       <nav>
         <h3><%= link_to "All Hands", hands_path %></h3>
-        <h3><%= link_to "Deal New Hand", new_hand_path %></h3>
+        <h3><%= link_to "Deal New Hand", hands_path, method: :post %></h3>
       </nav>
 
     <%= yield %>

@@ -1,11 +1,18 @@
-<h1>Hand #<%= @hand.id %></h1>
+
+<h1>EDIT PAGE: Hand #<%= @hand.id %></h1>
+
+
+<%= form_for @hand do |f| %>
 
 <div class="hand">
   <% @hand.cards.each do |card| %>
   <div>
     <p><%= card.value %> of <br/><%= card.suit %></p>
     <%= image_tag ("#{card.suit[0]}0#{card.value}.png") %>
+    <%= check_box_tag 'card_ids[]', card.id %>
   </div>
   <% end %>
 </div>
-<h1> <%= link_to "DRAW CARDS", edit_hand_path(@hand) %></h1>
+
+<%= f.submit %>
+<% end %>
