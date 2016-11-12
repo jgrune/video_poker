@@ -10,30 +10,32 @@
 </head>
 
 <body>
-  <h1><%= link_to "GruneTunes Video Poker", :root %></h1>
+  <header>
 
-  <nav>
-    <p style="float: right">
+    <nav>
+      <a href="/"><img id="logo" src="http://onlinecasinoaustralia.guru/wp-content/uploads/2015/04/VideoPokerLogoWEB.png"></a>
+
       <% if @current_user %>
-        <%= link_to "Welcome, #{@current_user.username}!", user_path(@current_user) %>
-        <%= link_to "Sign Out", session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Sign In", new_session_path %>
+      <div style="display: inline-block; float: right; margin: 20px 10px 0 0; text-align: right ">
+        <span><%= link_to "Welcome, #{@current_user.username}!", user_path(@current_user) %><br><br></span>
+        <span><%= link_to "Sign Out", session_path, method: :delete %></span>
+        <% else %>
+        <span style="float: right; margin: 20px 10px 0 0"><%= link_to "Sign In", new_session_path %></span>
+      </div>
       <% end %>
-    </p>
+    </nav>
 
     <% if @current_user %>
-      <h3><%= link_to "All Hands", hands_path %></h3>
-      <h3><%= link_to "Deal New Hand", hands_path, method: :post %></h3>
+    <li><%= link_to "All Hands", hands_path %></li> |
+    <li><%= link_to "Play Game!", hands_path, method: :post %></li>
     <% end %>
-  </nav>
-
+  </header>
   <!-- defines flash messages -->
   <% flash.each do |type, message| %>
-  <p class="<%= type %>"><%= message %></p>
+  <p style="text-align: center" class="<%= type %>"><%= message %></p>
   <% end %>
-
-  <%= yield %>
-
+  <main>
+    <%= yield %>
+  </main>
 </body>
 </html>

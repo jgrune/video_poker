@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'welcome#index'
+  get 'welcome/hands'=> 'welcome#hands'
   resources :users
   resources :hands
   resource :session

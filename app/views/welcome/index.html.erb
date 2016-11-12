@@ -1,35 +1,13 @@
 
-<h3>Game Rules:</h3>
-<p>The Game is simple:  You're dealt five cards.  You decide which ones to keep by tapping the pictures on the screen. Then you hit the DRAW button and you get replacement cards for the cards you didn't keep. You win if you wind up with a traditional poker hand like two pair, straight, flush, etc.  The amount you win per hand depends on how much you bet.  Here's a sample paytable.</p>
 
-<p>
-1. Royal flush <br>
-A, K, Q, J, 10, all the same suit.<br><br>
+  <h3>Game Rules:</h3>
+  <p>The Game is simple...  You're dealt five cards.
+  <br><br> You decide which ones to keep by tapping the pictures on the screen. Hit the DRAW button and get replacement cards for the cards you didn't keep. You win if you wind up with a traditional poker hand like two pair, straight, flush, etc.<br><br> The amount you win per hand depends on how much you bet! </p>
 
-2. Straight flush<br>
-Five cards in a sequence, all in the same suit.<br><br>
+<br>
+  <%= link_to "Hand Rankings", welcome_hands_path %>
 
-3. Four of a kind<br>
-All four cards of the same rank.<br><br>
-
-4. Full house<br>
-Three of a kind with a pair.<br><br>
-
-5. Flush<br>
-Any five cards of the same suit, but not in a sequence.<br><br>
-
-6. Straight<br>
-Five cards in a sequence, but not of the same suit.<br><br>
-
-7. Three of a kind<br>
-Three cards of the same rank.<br><br>
-
-8. Two pair<br>
-Two different pairs.<br><br>
-
-10. High Card<br>
-When you haven't made any of the hands above, the highest card plays.<br><br>
-</p>
-
-<%= button_to "Register Now to Play!!!", new_user_path,
-      :class => "button", :method => :get %>
+  <% if !@current_user %>
+  <%= button_to "Register Now to Play!!!", new_user_path,
+  :class => "button", :method => :get %>
+  <% end %>

@@ -24,7 +24,7 @@ class HandsController < ApplicationController
     end
     @lasthand = Hand.last
 
-    redirect_to @lasthand
+    redirect_to edit_hand_path(@lasthand)
   end
 
   def edit
