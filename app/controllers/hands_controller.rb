@@ -33,21 +33,23 @@ class HandsController < ApplicationController
 
   def update
     # render plain: params.inspect
-    card_array = params[:card_ids].map {|id|
-      Card.find(id)
-    }
-    card_array.each do |card|
-      card.hand_id = ""
-      card.save
-    end
+    if params[:card_ids]
+      card_array = params[:card_ids].map {|id|
+        Card.find(id)
+      }
+      card_array.each do |card|
+        card.hand_id = ""
+        card.save
+      end
 
-    new_cards = Card.order("RANDOM()").first(card_array.length)
+      new_cards = Card.order("RANDOM()").first(card_array.length)
 
-    new_cards.each do |card|
-      card.hand_id = params[:id]
-      card.img = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Bordered_#{card.suit[0]}_#{card.value}.svg/88px-Bordered_#{card.suit[0]}_#{card.value}.svg.png"
-      card.dealt = true
-      card.save
+      new_cards.each do |card|
+        card.hand_id = params[:id]
+        card.img = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Bordered_#{card.suit[0]}_#{card.value}.svg/88px-Bordered_#{card.suit[0]}_#{card.value}.svg.png"
+        card.dealt = true
+        card.save
+      end
     end
 
     last_hand = Hand.find(params[:id])

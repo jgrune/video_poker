@@ -10,7 +10,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
+    @user.dollars = 100
+    @user.save!
     session[:user_id] = @user.id
+    flash[:notice] = "Account Successfuly Created!"
     redirect_to hands_path
   end
 
