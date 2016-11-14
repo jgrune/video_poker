@@ -1,5 +1,6 @@
+<h1>Current funds: <span id="dollars">$<%= @current_user.dollars %></span></h1>
 <h1>Hand #<%= @hand.id %></h1>
-<h3 id="glow"><%= @test %></h3>
+<h3 id="glow"><%= @handrank %></h3>
 <div class="hand">
   <% @hand.cards.each do |card| %>
   <div>
@@ -8,4 +9,4 @@
   </div>
   <% end %>
 </div>
-<h1> <%= link_to "Play Again?", hands_path, method: :post  %></h1>
+<h1> <%= link_to "Play Again?", new_hand_path %></h1>

@@ -10,11 +10,9 @@ class HandsController < ApplicationController
 
   def show
     @hand = Hand.find(params[:id])
-    puts "*" * 50
-    puts @hand.cards.inspect
-    eval_hand = Poker::Hand.new(eval @hand.cards)
 
-    @test = eval_hand.rank
+    @handrank = @hand.get_poker_hand_rank
+    @current_user.updatebalance(@handrank, session[:bet])
   end
 
   def create
@@ -64,26 +62,6 @@ class HandsController < ApplicationController
 
 
   def delete
-  end
-
-private
-  def eval cards
-    @eval_hand = cards.map {|card|
-      if card.value == 14
-        "A#{card.suit[0]}"
-      elsif card.value == 13
-        "K#{card.suit[0]}"
-      elsif card.value == 12
-        "Q#{card.suit[0]}"
-      elsif card.value == 11
-        "J#{card.suit[0]}"
-      elsif card.value == 10
-        "T#{card.suit[0]}"
-      else
-        "#{card.value}#{card.suit[0]}"
-      end
-    }
-    @eval_hand.join(" ")
   end
 
 end
