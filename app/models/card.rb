@@ -5,6 +5,7 @@ class Card < ActiveRecord::Base
   def self.reset_deck
     Card.all.each do |card|
       card.dealt = false
+      card.save!
     end
   end
 end

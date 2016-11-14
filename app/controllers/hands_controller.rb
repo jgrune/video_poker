@@ -14,12 +14,6 @@ class HandsController < ApplicationController
   end
 
   def show
-    @handrank = @hand.get_poker_hand_rank
-
-    @hand.hand_rank = @handrank
-    @hand.save
-
-    @current_user.updatebalance(@handrank, session[:bet])
   end
 
   def create
@@ -38,11 +32,16 @@ class HandsController < ApplicationController
 
   def update
     if params[:card_ids]
-      @card_ids = params[:card_ids]
-      @hand.update_hand @card_ids
+      @hand.update_hand params[:card_ids]
     end
-    #
-    # Card.reset_deck
+
+    Card.reset_deck
+
+    @hand.hand_rank = @hand.get_poker_hand_rank
+    @hand.save
+
+    @current_user.updatebalance(@handrank, session[:bet])
+
     redirect_to @hand
   end
 
