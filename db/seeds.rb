@@ -14,7 +14,7 @@ suits = [ "hearts", "spades", "clubs", "diamonds" ]
 def build_deck ranks, suits
   ranks.each do |rank|
     suits.each do |suit|
-      Card.create!(value: rank, suit: suit, dealt: false)
+      Card.create!(value: rank, suit: suit, img: "#{suit[0]}0#{rank}.png", dealt: false)
     end
   end
 end

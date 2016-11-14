@@ -1,4 +1,9 @@
 class HandsController < ApplicationController
+  before_action :find_hand, only: [:show, :edit, :update]
+
+  def find_hand
+    @hand = Hand.find(params[:id])
+  end
 
   def index
     @hands = Hand.all
@@ -9,55 +14,36 @@ class HandsController < ApplicationController
   end
 
   def show
-    @hand = Hand.find(params[:id])
-
     @handrank = @hand.get_poker_hand_rank
+
+    @hand.hand_rank = @handrank
+    @hand.save
+
     @current_user.updatebalance(@handrank, session[:bet])
   end
 
   def create
     session[:bet] = params[:bet]
     # render plain: session.inspect
-    hand = Hand.create!
-    @card_array = Card.order("RANDOM()").first(5)
-    @card_array.each do |card|
-      card.hand_id = hand[:id]
-      card.img = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Bordered_#{card.suit[0]}_#{card.value}.svg/88px-Bordered_#{card.suit[0]}_#{card.value}.svg.png"
-      card.dealt = true
-      card.save
-    end
-    @lasthand = Hand.last
+    @hand = Hand.create!
+    @hand.user = @current_user
+    @hand.save
+    @hand.deal_hand
 
-    redirect_to edit_hand_path(@lasthand)
+    redirect_to edit_hand_path(Hand.last)
   end
 
   def edit
-    @hand = Hand.find(params[:id])
   end
 
   def update
-    # render plain: params.inspect
     if params[:card_ids]
-      card_array = params[:card_ids].map {|id|
-        Card.find(id)
-      }
-      card_array.each do |card|
-        card.hand_id = ""
-        card.save
-      end
-
-      new_cards = Card.order("RANDOM()").first(card_array.length)
-
-      new_cards.each do |card|
-        card.hand_id = params[:id]
-        card.img = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Bordered_#{card.suit[0]}_#{card.value}.svg/88px-Bordered_#{card.suit[0]}_#{card.value}.svg.png"
-        card.dealt = true
-        card.save
-      end
+      @card_ids = params[:card_ids]
+      @hand.update_hand @card_ids
     end
-
-    last_hand = Hand.find(params[:id])
-    redirect_to last_hand
+    #
+    # Card.reset_deck
+    redirect_to @hand
   end
 
 

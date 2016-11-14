@@ -1,5 +1,6 @@
 class Hand < ApplicationRecord
-  has_many :cards
+  has_many :cards_in_hand
+  has_many :cards, through: :cards_in_hand
   belongs_to :user, optional: true
 
   def eval
@@ -25,4 +26,26 @@ class Hand < ApplicationRecord
     Poker::Hand.new(eval).rank
   end
 
+  def deal_hand
+    @card_array = Card.order("RANDOM()").first(5)
+    @card_array.each do |card|
+      CardsInHand.create!(card: card, hand: self)
+      card.dealt = true
+      card.save
+    end
+  end
+
+  def update_hand card_ids
+    new_cards = Card.where(dealt: "false").order("RANDOM()").first(card_ids.length)
+
+    card_ids.each do |id|
+      replaced_card = CardsInHand.where(hand: self).find_by(card_id: id.to_i)
+      replaced_card.destroy
+    end
+
+    new_cards.each do |card|
+      CardsInHand.create!(card: card, hand: self)
+      card.save
+    end
+  end
 end

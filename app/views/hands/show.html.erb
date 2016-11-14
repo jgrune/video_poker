@@ -1,3 +1,4 @@
+<h1>You won $<span id="dollars">$<%= @winnings %></span></h1>
 <h1>Current funds: <span id="dollars">$<%= @current_user.dollars %></span></h1>
 <h1>Hand #<%= @hand.id %></h1>
 <h3 id="glow"><%= @handrank %></h3>
@@ -5,7 +6,7 @@
   <% @hand.cards.each do |card| %>
   <div>
     <p><%= card.value %> of <br/><%= card.suit %></p>
-    <%= image_tag ("#{card.suit[0]}0#{card.value}.png") %>
+    <%= image_tag (card.img) %>
   </div>
   <% end %>
 </div>

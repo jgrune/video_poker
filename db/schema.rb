@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111194401) do
+ActiveRecord::Schema.define(version: 20161114171824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,16 +20,25 @@ ActiveRecord::Schema.define(version: 20161111194401) do
     t.integer  "value"
     t.string   "img"
     t.boolean  "dealt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cards_in_hands", force: :cascade do |t|
+    t.integer  "card_id"
     t.integer  "hand_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["hand_id"], name: "index_cards_on_hand_id", using: :btree
+    t.index ["card_id"], name: "index_cards_in_hands_on_card_id", using: :btree
+    t.index ["hand_id"], name: "index_cards_in_hands_on_hand_id", using: :btree
   end
 
   create_table "hands", force: :cascade do |t|
     t.string   "hand_rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_hands_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,4 +49,7 @@ ActiveRecord::Schema.define(version: 20161111194401) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "cards_in_hands", "cards"
+  add_foreign_key "cards_in_hands", "hands"
+  add_foreign_key "hands", "users"
 end
