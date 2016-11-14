@@ -6,10 +6,11 @@ class HandsController < ApplicationController
 
   def show
     @hand = Hand.find(params[:id])
+    puts "*" * 50
+    puts @hand.cards.inspect
     eval_hand = Poker::Hand.new(eval @hand.cards)
 
-    # puts "*" * 50
-    # puts hand1.rank
+
     @test = eval_hand.rank
   end
 

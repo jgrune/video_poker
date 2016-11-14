@@ -15,7 +15,7 @@
  */
  @font-face {
    font-family: 'belle';
-   src: url('Bellerose.ttf')
+   src: url(font-path('Bellerose.ttf'))
  }
 
 body {
@@ -56,11 +56,11 @@ p {
 }
 
 div {
-  margin: 0 30px;
+  margin: 0 5px;
 }
 img {
-  height: 100px;
-  width: 75px;
+  height: 200px;
+  width: 150px;
 }
 
 .hand {

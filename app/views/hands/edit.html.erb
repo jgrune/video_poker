@@ -1,4 +1,4 @@
-
+<h1>Current funds: <span id="dollars">$<%= @current_user.dollars %></span></h1>
 <h1>Select Cards to Replace</h1>
 <h3>Hand #<%= @hand.id %></h3>
 
@@ -8,7 +8,7 @@
 
   <% @hand.cards.each do |card| %>
     <div>
-      <p><%= card.value %> of <br/><%= card.suit %></p>
+      <!-- <p><%= card.value %> of <br/><%= card.suit %></p> -->
 
       <input class="box" style="display: none" id="<%=card.id %>" name="card_ids[]" value="<%=card.id %>"  type="checkbox"  />
       <label for="<%= card.id %>"><%= image_tag ("#{card.suit[0]}0#{card.value}.png"), :class => "selected" %></label>

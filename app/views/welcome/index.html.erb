@@ -5,7 +5,7 @@
   <br><br> You decide which ones to keep by tapping the pictures on the screen. Hit the DRAW button and get replacement cards for the cards you didn't keep. You win if you wind up with a traditional poker hand like two pair, straight, flush, etc.<br><br> The amount you win per hand depends on how much you bet! </p>
 
 <br>
-  <%= link_to "Hand Rankings", welcome_hands_path %>
+  <button class="button"><%= link_to "Hand Rankings", welcome_hands_path %></button>
 
   <% if !@current_user %>
   <%= button_to "Register Now to Play!!!", new_user_path,
