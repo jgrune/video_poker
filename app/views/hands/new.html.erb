@@ -1,0 +1,16 @@
+<h1>Enter Bet Below.. </h1>
+
+<%= form_for @hand do |f| %>
+<%= text_field_tag "bet", value = nil, :class => "bet" %>
+<h1>Current Balance: $<%= @current_user.dollars %></h1>
+
+<h3 id="glow"><%= @test %></h3>
+<div class="hand">
+  <% 5.times do %>
+  <div>
+    <%= image_tag ("cardback.png") %>
+  </div>
+  <% end %>
+</div>
+<h1> <%= f.submit %></h1>
+<% end %>

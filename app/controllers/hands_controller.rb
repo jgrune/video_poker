@@ -4,17 +4,22 @@ class HandsController < ApplicationController
     @hands = Hand.all
   end
 
+  def new
+    @hand = Hand.new
+  end
+
   def show
     @hand = Hand.find(params[:id])
     puts "*" * 50
     puts @hand.cards.inspect
     eval_hand = Poker::Hand.new(eval @hand.cards)
 
-
     @test = eval_hand.rank
   end
 
   def create
+    session[:bet] = params[:bet]
+    # render plain: session.inspect
     hand = Hand.create!
     @card_array = Card.order("RANDOM()").first(5)
     @card_array.each do |card|

@@ -9,5 +9,5 @@ class ApplicationController < ActionController::Base
      @current_user = nil   # ...otherwise, set @current_user to nil
    end
  end
- 
+
 end
