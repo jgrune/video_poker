@@ -240,7 +240,7 @@ input:checked + label{
   border-bottom: 5px solid #FF14AB;
   background-color: rgba(255, 255, 255, 1);
   left: 0px;
-  top: 10%;
+  top: 15%;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   padding: 20px;
