@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   get 'welcome/hands'=> 'welcome#hands'
+  get 'users/:id/statistics'=> 'users#statistics'
+
   resources :users
   resources :hands
   resource :session

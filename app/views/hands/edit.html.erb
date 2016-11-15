@@ -1,8 +1,6 @@
 <h1>Current funds: <span id="dollars">$<%= @current_user.dollars %></span></h1>
 <h1>Bet Amount: $<%= session[:bet] %></h1>
 <h1>Select Cards to Replace</h1>
-<h3>Hand #<%= @hand.id %></h3>
-
 <%= form_for @hand do |f| %>
 
 <div class="hand">

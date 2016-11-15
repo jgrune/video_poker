@@ -2,7 +2,7 @@
 <h1>Enter Bet Below.. </h1>
 
 <%= form_for @hand do |f| %>
-<span id="dollar">$ </span><%= text_field_tag "bet", value = nil, :class => "bet" %>
+<span id="dollar">$ </span><%= text_field_tag "bet", value = nil, :class => "text_field", :style => "width: 5vw" %>
 
 <h3 id="glow"><%= @handrank %></h3>
 <div class="hand">

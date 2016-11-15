@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :set_current_user
+  before_action :set_current_user, :high_scores
 
   def set_current_user
    if User.exists?(session[:user_id])    # If there is a user_id currently stored in the session hash...
@@ -10,5 +10,9 @@ class ApplicationController < ActionController::Base
      end
    end
 
-   
+   def high_scores
+     @users = User.order(:dollars).reverse_order.all
+   end
+
+
 end

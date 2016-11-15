@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 </head>
 
 <body>
@@ -28,16 +29,35 @@
 
     <% if @current_user %>
     <li><%= link_to "How to Play", root_path %></li> |
+    <li><a href=" /users/<%=@current_user.id%>/statistics">Statistics</a></li> |
     <li><%= link_to "All Hands", hands_path %></li> |
     <li><%= link_to "Play Game!", new_hand_path %></li>
     <% end %>
   </header>
-  <%# image_tag "header_break.png", :id => 'break' %>
-  <!-- defines flash messages -->
   <% flash.each do |type, message| %>
-  <p style="text-align: center" class="<%= type %>"><%= message %></p>
+    <p style="text-align: center" class="<%= type %>"><%= message %></p>
   <% end %>
-  <main>
+
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <ol>
+    <% @users.each do |user| %>
+      <% if user.username == @current_user.username %>
+        <li style="color: red">
+          <%= user.username %> - $<%= user.dollars %>
+        <li>
+      <% end %>
+      <li>
+        <%= user.username %> - $<%= user.dollars %>
+      </li>
+    <% end %>
+    <ol>
+  </div>
+
+  <!-- Use any element to open the sidenav -->
+  <span id="leaderboard" onclick="openNav()"><strong>Leaderboard</strong></span>
+
+  <main onclick=closeNav()>
     <%= yield %>
   </main>
 </body>

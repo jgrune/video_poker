@@ -1,0 +1,13 @@
+  <h1><%= @current_user.username %> Game Statistics</h1>
+  <ul>
+    <li>Royal Flush</li> - <%= ((@current_user.hands.where(hand_rank: "Royal Flush").count / @current_user.hands.count.to_f) * 100).round(2) %>% <br>
+    <li>Straight Flush</li> - <%= ((@current_user.hands.where(hand_rank: "Straight Flush").count / @current_user.hands.count.to_f) * 100).round(2) %>% <br>
+    <li>Four of a Kind</li> - <%= ((@current_user.hands.where(hand_rank: "Four of a Kind").count / @current_user.hands.count.to_f) * 100).round(2) %>% <br>
+    <li>Full House</li> - <%= ((@current_user.hands.where(hand_rank: "Full House").count / @current_user.hands.count.to_f) * 100).round(2) %>% <br>
+    <li>Flush</li> - <%= ((@current_user.hands.where(hand_rank: "Flush").count / @current_user.hands.count.to_f) * 100).round(2) %>% <br>
+    <li>Straight</li> - <%= ((@current_user.hands.where(hand_rank: "Straight").count / @current_user.hands.count.to_f) * 100).round(2) %>% <br>
+    <li>Three of a Kind</li> - <%= ((@current_user.hands.where(hand_rank: "Three of a Kind").count / @current_user.hands.count.to_f) * 100).round(2) %>% <br>
+    <li>Two Pair</li> - <%= ((@current_user.hands.where(hand_rank: "Two Pair").count / @current_user.hands.count.to_f) * 100).round(2) %>% <br>
+    <li>Pair</li> - <%= ((@current_user.hands.where(hand_rank: "Pair").count / @current_user.hands.count.to_f) * 100).round(2) %>% <br>
+    <li>High Card</li> - <%= ((@current_user.hands.where(hand_rank: "High Card").count / @current_user.hands.count.to_f) * 100).round(2) %>% <br>
+  </ul>

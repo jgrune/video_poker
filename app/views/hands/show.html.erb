@@ -4,12 +4,10 @@
   <h1>You lost <span id="dollars">$<%= session[:winnings] * -1 %></span></h1>
 <% end %>
 <h1>Current funds: <span id="dollars">$<%= @current_user.dollars %></span></h1>
-<h1>Hand #<%= @hand.id %></h1>
 <h3 id="glow"><%= @hand.hand_rank %></h3>
 <div class="hand">
   <% @hand.cards.each do |card| %>
   <div>
-    <p><%= card.value %> of <br/><%= card.suit %></p>
     <%= image_tag (card.img) %>
   </div>
   <% end %>
