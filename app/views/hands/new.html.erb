@@ -1,8 +1,8 @@
+<h1>Current Balance: $<%= @current_user.dollars %></h1>
 <h1>Enter Bet Below.. </h1>
 
 <%= form_for @hand do |f| %>
-<%= text_field_tag "bet", value = nil, :class => "bet" %>
-<h1>Current Balance: $<%= @current_user.dollars %></h1>
+<span id="dollar">$ </span><%= text_field_tag "bet", value = nil, :class => "bet" %>
 
 <h3 id="glow"><%= @handrank %></h3>
 <div class="hand">
