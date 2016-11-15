@@ -1,8 +1,8 @@
-<h1>Current Balance: $<%= @current_user.dollars %></h1>
 <h1>Enter Bet Below.. </h1>
 
 <%= form_for @hand do |f| %>
-<span id="dollar">$ </span><%= number_field_tag "bet", value = nil, :class => "text_field", :style => "width: 5vw" %>
+<span id="dollar">$ </span><%= number_field_tag "bet", value = nil, :class => "text_field", :style => "width: 10vw", min: 0, max: @current_user.dollars, step: 10 %>
+<span style="margin: 0 0 0 20px"><%= f.submit 'Deal!', :class => "button" %></span>
 
 <h3 id="glow"><%= @handrank %></h3>
 <div class="hand">
@@ -12,5 +12,5 @@
   </div>
   <% end %>
 </div>
-<h1> <%= f.submit 'Deal!', :class => "button" %></h1>
+
 <% end %>

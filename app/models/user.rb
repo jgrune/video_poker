@@ -32,4 +32,9 @@ class User < ApplicationRecord
     self.save
   end
 
+  def reload_balance
+    self.dollars = 100
+    self.save
+  end
+
 end
