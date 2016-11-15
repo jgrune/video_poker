@@ -19,6 +19,8 @@ class Hand < ApplicationRecord
         "#{card.value}#{card.suit[0]}"
       end
     }
+    puts "*" * 100
+    puts @eval_hand.join(" ")
     @eval_hand.join(" ")
   end
 
@@ -31,22 +33,31 @@ class Hand < ApplicationRecord
     @card_array = Card.order("RANDOM()").first(5)
     @card_array.each do |card|
       CardsInHand.create!(card: card, hand: self)
-      card.dealt = true
-      card.save
     end
   end
 
   def update_hand card_ids
-    new_cards = Card.where(dealt: "false").order("RANDOM()").first(card_ids.length)
 
+    # create new cards (length of card.id array) whos ids are not in the temp array
+    used = self.cards.map {|card| card.id}
+    deck = Card.all.map {|card| card.id}
+
+    new_ids = (deck - used).sample(card_ids.length)
+    new_cards = new_ids.map {|id| Card.find(id)}
+
+    # add new cards to hand
+    new_cards.each do |card|
+      CardsInHand.create!(card: card, hand: self)
+    end
+
+    # delete replaced cards from hand
     card_ids.each do |id|
-      replaced_card = CardsInHand.where(hand: self).find_by(card_id: id.to_i)
+      replaced_card = CardsInHand.where(hand: self).find_by(card_id: id)
       replaced_card.destroy
     end
 
-    new_cards.each do |card|
-      CardsInHand.create!(card: card, hand: self)
-      card.save
-    end
+    puts "&" * 100
+    puts self.cards.inspect
+
   end
 end

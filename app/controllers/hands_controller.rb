@@ -35,8 +35,7 @@ class HandsController < ApplicationController
       @hand.update_hand params[:card_ids]
     end
 
-    Card.reset_deck
-
+    @hand.reload
     @hand.get_poker_hand_rank
 
     session[:winnings] = @current_user.calc_winnings(@hand.hand_rank, session[:bet])

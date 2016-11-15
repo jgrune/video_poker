@@ -9,22 +9,17 @@ class UsersController < ApplicationController
   end
 
   def create
-    # $$$$ validate username does not already exist!! $$$$
-
-    # if params[:username] > @current_user.dollars
-    #   flash[:alert] = "You don't have enough money to bet that amount!"
-    #   redirect_to new_hand_path
-    # elsif params[:bet].to_i < 0
-    #   flash[:alert] = "You must enter a bet greater than zero"
-    #   redirect_to new_hand_path
-    # else
-
-    @user = User.create(user_params)
-    @user.dollars = 100
-    @user.save!
-    session[:user_id] = @user.id
-    flash[:notice] = "Account Successfuly Created!"
-    redirect_to @user
+    if User.find_by(username: params[:user][:username])
+      flash[:alert] = "Username is already taken!"
+      redirect_to new_user_path
+    else
+      @user = User.create(user_params)
+      @user.dollars = 100
+      @user.save!
+      session[:user_id] = @user.id
+      flash[:notice] = "Account Successfuly Created!"
+      redirect_to @user
+    end
   end
 
   def show

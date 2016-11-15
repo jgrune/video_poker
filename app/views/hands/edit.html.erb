@@ -5,11 +5,9 @@
 
   <% @hand.cards.each do |card| %>
     <div>
-      <!-- <p><%= card.value %> of <br/><%= card.suit %></p> -->
-
+      <!-- clicking an image selects a hidden checkbox, who's value is passed back via params in card_ids[] -->
       <input class="box" style="display: none" id="<%=card.id %>" name="card_ids[]" value="<%=card.id %>"  type="checkbox"  />
       <label for="<%= card.id %>"><%= image_tag ("#{card.suit[0]}0#{card.value}.png"), :class => "selected" %></label>
-
     </div>
   <% end %>
 
