@@ -32,7 +32,6 @@
     <% if @current_user %>
     <li><%= link_to "How to Play", root_path %></li> |
     <li><a href=" /users/<%=@current_user.id%>/statistics">Statistics</a></li> |
-    <li><%= link_to "All Hands", hands_path %></li> |
     <li><%= link_to "Play Game!", new_hand_path %></li>
     <% end %>
   </header>

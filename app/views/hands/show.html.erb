@@ -1,10 +1,11 @@
+<h1 id="glow"><%= @hand.hand_rank %></h1>
+
 <% if session[:winnings] > 0  %>
-  <h1>You won <span id="dollars">$<%= session[:winnings] %></span></h1>
+  <h1>You won <span id="dollars">$<%= session[:winnings] %> &#x1F601 </span></h1>
 <% else %>
-  <h1>You lost <span id="dollars">$<%= session[:winnings] * -1 %></span></h1>
+  <h1>You lost <span id="dollars">$<%= session[:winnings] * -1 %> &#x1F628 </span></h1>
 <% end %>
 <h1>Current funds: <span id="dollars">$<%= @current_user.dollars %></span></h1>
-<h3 id="glow"><%= @hand.hand_rank %></h3>
 <div class="hand">
   <% @hand.cards.each do |card| %>
   <div>
