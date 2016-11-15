@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user.save!
     session[:user_id] = @user.id
     flash[:notice] = "Account Successfuly Created!"
-    redirect_to hands_path
+    redirect_to @user
   end
 
   def show

@@ -23,7 +23,8 @@ class Hand < ApplicationRecord
   end
 
   def get_poker_hand_rank
-    Poker::Hand.new(eval).rank
+    self.hand_rank = Poker::Hand.new(eval).rank
+    self.save!
   end
 
   def deal_hand

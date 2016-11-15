@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :hands
 
-  def updatebalance handrank, bet
+  def calc_winnings handrank, bet
     case handrank
       when "Royal Flush"
         @winnings = bet.to_i * 500
@@ -22,9 +22,13 @@ class User < ApplicationRecord
       when "Pair"
         @winnings = bet.to_i * 1
       else
-        @winnings = 0
+        @winnings = bet.to_i * -1
     end
-    self.dollars += @winnings
+      @winnings
+  end
+
+  def update_balance winnings
+    self.dollars += winnings
     self.save
   end
 

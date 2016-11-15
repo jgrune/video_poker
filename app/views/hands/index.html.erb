@@ -1,4 +1,4 @@
-<h1>Hands</h1>
+<h1><%= @current_user.username %>'s Hand History</h1>
 
 <% @hands.each do |hand| %>
 <p><%= link_to "Hand ##{hand.id}", hand, :style => "color: #780216" %></p>

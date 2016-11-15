@@ -6,7 +6,7 @@ class HandsController < ApplicationController
   end
 
   def index
-    @hands = Hand.all
+    @hands = @current_user.hands
   end
 
   def new
@@ -37,10 +37,10 @@ class HandsController < ApplicationController
 
     Card.reset_deck
 
-    @hand.hand_rank = @hand.get_poker_hand_rank
-    @hand.save
+    @hand.get_poker_hand_rank
 
-    @current_user.updatebalance(@handrank, session[:bet])
+    session[:winnings] = @current_user.calc_winnings(@hand.hand_rank, session[:bet])
+    @current_user.update_balance session[:winnings]
 
     redirect_to @hand
   end
