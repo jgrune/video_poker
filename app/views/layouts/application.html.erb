@@ -42,14 +42,15 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <ol>
     <% @users.each do |user| %>
-      <% if user.username == @current_user.username %>
-        <li style="color: red">
-          <%= user.username %> - $<%= user.dollars %>
-        <li>
-      <% end %>
+      <% if @current_user && user.username == @current_user.username %>
+      <li style="color: red">
+        <%= user.username %> - $<%= user.dollars %>
+      </li>
+      <% else %>
       <li>
         <%= user.username %> - $<%= user.dollars %>
       </li>
+      <% end %>
     <% end %>
     <ol>
   </div>
