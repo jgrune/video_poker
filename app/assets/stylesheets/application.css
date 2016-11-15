@@ -113,7 +113,7 @@ a:hover {
   position: relative;
   display: block;
   text-align: center;
-  animation: neon1 1.5s ease-in-out infinite alternate;
+  animation: neon1 2s ease-in-out infinite alternate;
   color: #FF14AB;
   margin: 20px;
 }
