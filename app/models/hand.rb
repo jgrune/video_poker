@@ -39,32 +39,19 @@ class Hand < ApplicationRecord
 
   def update_hand card_ids
     # get ids of cards you want to replace
-    used = self.cards.map {|card| card.id}
+    used_card_ids = self.cards.map {|card| card.id}
     card_ids = card_ids.map {|id| id.to_i}
     replace_ids = used - card_ids
 
-    # remember those replacement card positions
-    replace_ids_pos = replace_ids.map{|id|
-      card = CardsInHand.find_by(hand: self, card_id: id)
-      card.position
-     }
-
     # get ids of new cards (ensuring you don't select cards from original hand)
-    deck = Card.all.map {|card| card.id}
-    new_ids = (deck - used).sample(replace_ids.length)
+    all_card_ids = Card.all.map {|card| card.id}
+    new_ids = (all_card_ids - used_card_ids).sample(replace_ids.length)
 
-    # add new cards to hand and assign appropriate positions
-    num = 0
-    new_ids.each do |id|
-      CardsInHand.create!(card_id: id, hand: self, position: replace_ids_pos[num])
-      num += 1
-    end
-
-    # delete replaced cards from hand
-    replace_ids.each do |id|
-      replaced_card = CardsInHand.where(hand: self).find_by(card_id: id)
-      replaced_card.destroy
-    end
+    # update old cards with new cards
+    replace_ids.each_with_index {|id, i|
+      card = CardsInHand.find_by(hand: self, card_id: id)
+      card.update!(card_id: new_ids[i])
+     }
 
   end
 end
