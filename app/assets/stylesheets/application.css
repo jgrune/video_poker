@@ -251,3 +251,11 @@ input:checked + label{
   border-bottom-right-radius: 20px;
   padding: 20px;
 }
+
+td {
+  padding: 0 10px
+}
+
+th {
+  padding: 15px
+}

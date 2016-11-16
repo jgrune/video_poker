@@ -37,9 +37,6 @@ class HandsController < ApplicationController
 
     @hand.reload
 
-    puts "*" * 50
-    puts @hand.cards.inspect
-
     @hand.get_poker_hand_rank
 
     session[:winnings] = @current_user.calc_winnings(@hand.hand_rank, session[:bet])
