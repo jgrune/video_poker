@@ -19,8 +19,7 @@ class Hand < ApplicationRecord
         "#{card.value}#{card.suit[0]}"
       end
     }
-    puts "*" * 100
-    puts @eval_hand.join(" ")
+
     @eval_hand.join(" ")
   end
 
@@ -55,9 +54,6 @@ class Hand < ApplicationRecord
       replaced_card = CardsInHand.where(hand: self).find_by(card_id: id)
       replaced_card.destroy
     end
-
-    puts "&" * 100
-    puts self.cards.inspect
 
   end
 end

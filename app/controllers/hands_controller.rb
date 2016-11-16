@@ -18,7 +18,7 @@ class HandsController < ApplicationController
 
   def create
     session[:bet] = params[:bet]
-    # render plain: session.inspect
+
     @hand = Hand.create!
     @hand.user = @current_user
     @hand.save
@@ -42,10 +42,6 @@ class HandsController < ApplicationController
     @current_user.update_balance session[:winnings]
 
     redirect_to @hand
-  end
-
-
-  def delete
   end
 
 end
