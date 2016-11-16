@@ -14,8 +14,6 @@ class HandsController < ApplicationController
   end
 
   def show
-    puts "&" * 50
-    puts @hand.cards_in_hand.inspect
   end
 
   def create
@@ -25,9 +23,6 @@ class HandsController < ApplicationController
     @hand.user = @current_user
     @hand.save
     @hand.deal_hand
-
-    puts "*" * 50
-    puts @hand.cards_in_hand.inspect
 
     redirect_to edit_hand_path(Hand.last)
   end
@@ -42,8 +37,8 @@ class HandsController < ApplicationController
 
     @hand.reload
 
-    puts "^" * 50
-    puts @hand.cards_in_hand.inspect
+    puts "*" * 50
+    puts @hand.cards.inspect
 
     @hand.get_poker_hand_rank
 
