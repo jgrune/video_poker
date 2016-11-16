@@ -29,12 +29,12 @@ class Hand < ApplicationRecord
     self.save!
   end
 
-  def deal_hand
-    @card_array = Card.order("RANDOM()").first(5)
-    @card_array.each do |card|
-      CardsInHand.create!(card: card, hand: self)
-    end
-  end
+  # def deal_hand
+  #   @card_array = Card.order("RANDOM()").first(5)
+  #   @card_array.each do |card|
+  #     CardsInHand.create!(card: card, hand: self)
+  #   end
+  # end
 
   def update_hand card_ids
 

@@ -10,9 +10,13 @@ class Deck
     @cards = @cards.shuffle!
   end
 
-  def deal num
-    dealt_cards = []
-    dealt_cards << @cards.pop(num)
+  def deal num, hand
+    dealt_cards = @cards.pop(num)
+
+    dealt_cards.each do |card|
+      CardsInHand.create!(card: card, hand: hand)
+    end
+
   end
 
 end

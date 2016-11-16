@@ -212,9 +212,12 @@ input:checked + label{
     /*margin: 0 0 0 -20px;*/
 }
 
+#user_highscore{
+  color: red;
+}
 /* When you mouse over the navigation links, change their color */
-.sidenav li:hover{
-    color: #f1f1f1;
+.sidenav li:hover, #user_highscore:hover{
+  color: #f1f1f1;
 }
 
 /* Position and style the close button (top right corner) */

@@ -20,9 +20,13 @@ class HandsController < ApplicationController
     session[:bet] = params[:bet]
     # render plain: session.inspect
     @hand = Hand.create!
+
+    @deck = Deck.new
+    @deck.deal 5, @hand
+
     @hand.user = @current_user
+
     @hand.save
-    @hand.deal_hand
 
     redirect_to edit_hand_path(Hand.last)
   end
