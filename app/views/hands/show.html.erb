@@ -7,9 +7,9 @@
 <% end %>
 <h1>Current Balance: <span id="dollars">$<%= @current_user.dollars %></span></h1>
 <div class="hand">
-  <% @hand.cards.each do |card| %>
+  <% @hand.cards_in_hand.order(:position).reverse_order.each do |id| %>
   <div>
-    <%= image_tag (card.img) %>
+    <%= image_tag (id.card.img) %>
   </div>
   <% end %>
 </div>

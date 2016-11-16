@@ -30,8 +30,10 @@ class Hand < ApplicationRecord
 
   def deal_hand
     @card_array = Card.order("RANDOM()").first(5)
+    num = 1
     @card_array.each do |card|
-      CardsInHand.create!(card: card, hand: self)
+      CardsInHand.create!(card: card, hand: self, position: num)
+      num += 1
     end
   end
 
@@ -39,18 +41,27 @@ class Hand < ApplicationRecord
 
     # create new cards (length of card.id array) whos ids are not in the temp array
 
+    # get ids of cards you want to replace
     used = self.cards.map {|card| card.id}
     card_ids = card_ids.map {|id| id.to_i}
-    deck = Card.all.map {|card| card.id}
-
     replace_ids = used-card_ids
 
-    new_ids = (deck - used).sample(5 - card_ids.length)
-    new_cards = new_ids.map {|id| Card.find(id)}
+    replace_ids_pos = replace_ids.map{|id|
+      card = CardsInHand.find_by(hand: self, card_id: id)
+      card.position
+     }
+
+    # get ids of new cards (ensuring you don't select cards from original hand)
+    deck = Card.all.map {|card| card.id}
+    new_ids = (deck - used).sample(replace_ids.length)
+
+    # new_cards = new_ids.map {|id| Card.find(id)}
 
     # add new cards to hand
-    new_cards.each do |card|
-      CardsInHand.create!(card: card, hand: self)
+    new_ids.each do |id|
+      replace_ids_pos.each do |pos|
+        CardsInHand.create!(card_id: id, hand: self, position: pos)
+      end
     end
 
     # delete replaced cards from hand
