@@ -30,18 +30,17 @@ class Hand < ApplicationRecord
 
   def deal_hand
     @card_array = Card.order("RANDOM()").first(5)
-    num = 1
-    @card_array.each do |card|
-      CardsInHand.create!(card: card, hand: self, position: num)
-      num += 1
-    end
+
+    @card_array.each_with_index{|card, i|
+      CardsInHand.create!(card: card, hand: self, position: i + 1)
+    }
   end
 
   def update_hand card_ids
     # get ids of cards you want to replace
     used_card_ids = self.cards.map {|card| card.id}
     card_ids = card_ids.map {|id| id.to_i}
-    replace_ids = used - card_ids
+    replace_ids = used_card_ids - card_ids
 
     # get ids of new cards (ensuring you don't select cards from original hand)
     all_card_ids = Card.all.map {|card| card.id}
