@@ -1,11 +1,13 @@
-  <h2>Game Rules:</h2>
-  <h3>The Game is simple...  You're dealt five cards.</h3>
-<p>You win if you wind up with a traditional poker hand like two pair, straight, flush, etc.  You are given one opportunity to replace cards, and you decide which ones to hold by clicking the cards on the screen. Hit the deal button to get replacement cards.<br><br> The amount you win per hand depends on how much you bet! </p>
+<h2>Game Rules:</h2>
+<h3>The Game is simple...  You're dealt five cards.</h3>
+<h4>You win if you wind up with a traditional poker hand (e.g., two pair, straight, etc.)</h4>
+<h4>You are given one opportunity to replace cards, and you decide which ones to hold by clicking the cards on the screen.</h4>
+<h4>Hit the deal button to get replacement cards.</h4>
+<h4>The amount you win per hand depends on how much you bet! </h4>
 
-<br>
-  <%= link_to "Hand Rankings/Payouts", welcome_hands_path, :class => "button" %>
+<%= link_to "Hand Rankings/Payouts", welcome_hands_path, :class => "button" %>
 
-  <% if !@current_user %>
+<% if !@current_user %>
   <%= button_to "Register Now to Play!!!", new_user_path,
   :class => "button", :method => :get %>
-  <% end %>
+<% end %>
