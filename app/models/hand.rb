@@ -38,10 +38,14 @@ class Hand < ApplicationRecord
   def update_hand card_ids
 
     # create new cards (length of card.id array) whos ids are not in the temp array
+
     used = self.cards.map {|card| card.id}
+    card_ids = card_ids.map {|id| id.to_i}
     deck = Card.all.map {|card| card.id}
 
-    new_ids = (deck - used).sample(card_ids.length)
+    replace_ids = used-card_ids
+
+    new_ids = (deck - used).sample(5 - card_ids.length)
     new_cards = new_ids.map {|id| Card.find(id)}
 
     # add new cards to hand
@@ -50,7 +54,7 @@ class Hand < ApplicationRecord
     end
 
     # delete replaced cards from hand
-    card_ids.each do |id|
+    replace_ids.each do |id|
       replaced_card = CardsInHand.where(hand: self).find_by(card_id: id)
       replaced_card.destroy
     end

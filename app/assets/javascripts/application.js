@@ -24,3 +24,11 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
+
+function hold(id) {
+  if (document.getElementById(id).style.display == "block"){
+    document.getElementById(id).style.display = "none";
+  } else {
+    document.getElementById(id).style.display = "block"
+  }
+}
