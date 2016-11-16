@@ -31,6 +31,10 @@ class UsersController < ApplicationController
     redirect_to @current_user
   end
 
+  def statistics
+    @hand_ranks = ["Royal Flush", "Straight Flush", "Four of a Kind", "Full House", "Flush", "Straight", "Three of a Kind", "Two Pair", "Pair", "High Card"]
+  end
+
 private
   def user_params
     params.require(:user).permit(:username, :password)
