@@ -6,7 +6,7 @@
   <% @hand.cards_in_hand.order(:position).reverse_order.each do |id| %>
     <div>
       <!-- clicking an image selects a hidden checkbox, who's value is passed back via params in card_ids[] -->
-      <input class="box" style="di .splay: none" id="<%=id.card.id %>" name="card_ids[]" value="<%=id.card.id %>"  type="checkbox"  />
+      <input class="box" style="display: none" id="<%=id.card.id %>" name="card_ids[]" value="<%=id.card.id %>"  type="checkbox"  />
       <label for="<%= id.card.id %>" onclick="hold(<%= id.card.id %> + 100)"><div id="<%= id.card.id + 100%>">Hold</div><%= image_tag ("#{id.card.suit[0]}0#{id.card.value}.png"), :class => "selected" %></label>
     </div>
   <% end %>
