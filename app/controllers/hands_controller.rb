@@ -1,6 +1,6 @@
 class HandsController < ApplicationController
   before_action :find_hand, only: [:show, :edit, :update]
-
+  # make this a private method
   def find_hand
     @hand = Hand.find(params[:id])
   end
@@ -18,7 +18,7 @@ class HandsController < ApplicationController
 
   def create
     session[:bet] = params[:bet]
-
+    # could this be refactored like this: @hand = @current_user.hands.create!
     @hand = Hand.create!
     @hand.user = @current_user
     @hand.save
@@ -31,6 +31,7 @@ class HandsController < ApplicationController
   end
 
   def update
+    ## there's a bug in this method, if you don't select any of the cards too hold, it doesn't replace any of the cards. I think this is happening because of this if conditional
     if params[:card_ids]
       @hand.update_hand params[:card_ids]
     end
