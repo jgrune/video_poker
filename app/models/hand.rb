@@ -4,6 +4,13 @@ class Hand < ApplicationRecord
   belongs_to :user, optional: true
 
   def eval
+    # no need to use instance variable here. Unless your trying to make it accessible on the instance, which it doesn't look like
+    # additionally, I recommend using a hash here instead of nested conditionals something like this:
+    # hand_mapping = {
+    #   14: "A",
+    #   13: "K",
+    #   ...
+    # }
     @eval_hand = self.cards.map {|card|
       if card.value == 14
         "A#{card.suit[0]}"
@@ -36,6 +43,7 @@ class Hand < ApplicationRecord
     }
   end
 
+#: +1:
   def update_hand card_ids
     # get ids of cards you want to replace
     used_card_ids = self.cards.map {|card| card.id}

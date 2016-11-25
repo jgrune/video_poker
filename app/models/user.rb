@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :hands
 
+  # this looks like it should be a hash that does this.
   def calc_winnings handrank, bet
     case handrank
       when "Royal Flush"

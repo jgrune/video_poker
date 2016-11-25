@@ -10,6 +10,8 @@ class UsersController < ApplicationController
       redirect_to new_user_path
     else
       @user = User.create(user_params)
+      ## this is a magic number ,try and leave these out. Instead create a variable like `starting_amount`
+      # http://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad
       @user.dollars = 100
       @user.save!
       session[:user_id] = @user.id
